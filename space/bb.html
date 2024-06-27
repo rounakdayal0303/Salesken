@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceX Launches</title>
+    <link rel="stylesheet" href="st.css">
+    <link rel="icon" href="images.png">
+</head>
+<body>
+    <div class="container">
+        <h1>SpaceX Launches</h1>
+        <div id="navbar">
+            <a href="login.html" id="login">login</a>
+            <a href="signup.html" id="signup">signup</a>
+            <a href="" id="Home">Home</a>
+        </div>
+        <div id="launches"></div>
+    </div>
+
+    <script>
+        const fetchLaunches = async () => {
+            const response = await fetch('https://api.spacexdata.com/v3/launches');
+            const launches = await response.json();
+            const launchesContainer = document.getElementById('launches');
+            
+            launches.forEach(launch => {
+                const launchElement = document.createElement('div');
+                launchElement.classList.add('launch');
+
+                launchElement.innerHTML = `
+                    <img src="${launch.links.mission_patch}" alt="${launch.mission_name}" class="mission-patch">
+                    <div class="launch-details">
+                        <h2 class="mission-name">${launch.mission_name}</h2>
+                        <p class="launch-date">Launch Date: ${new Date(launch.launch_date_local).toLocaleDateString('en-GB')}</p>
+                        <p class="rocket-name">Rocket: ${launch.rocket.rocket_name}</p>
+                        <p class="site-name">Launch Site: ${launch.launch_site.site_name}</p>
+                    </div>
+                `;
+                
+                launchesContainer.appendChild(launchElement);
+            });
+        };
+
+        fetchLaunches();
+    </script>
+</body>
+</html>
