@@ -14,7 +14,7 @@ Rocket details
 Mission details
 # Setup To run this project locally:
 Clone the repository:
-git clone https://github.com/yourusername/spacex-webpage.git
+git clone https://github.com/rounakdayal0303/Salesken.git
 Navigate to the project directory:
 cd spacex-webpage
 Open index.html in your preferred web browser.
